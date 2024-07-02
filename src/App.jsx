@@ -1,6 +1,12 @@
 import {useState} from "react"
 
-const Post = () => {
+import { MdModeComment } from "react-icons/md";
+import { FaAngleDown } from "react-icons/fa";
+import { FaAngleUp } from "react-icons/fa";
+
+const Post = (props) => {
+  const [post, setPost] = useState(undefined)
+
   return (
     <div className="p-2 bg-white shadow-lg rounded self-center flex flex-row gap-4" style={{minWidth: '35rem', maxWidth: '35rem', maxHeight: '30rem'}}>
       <div className="flex flex-col justify-between p-2 gap-2">
@@ -13,15 +19,15 @@ const Post = () => {
           <p className="text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel dapibus dui. Donec sed turpis eu nulla pulvinar pulvinar. Donec in tortor tempus, egestas diam eget, consequat dui. Cras elit libero, euismod id malesuada in, tempus sed justo. Aenean ut interdum massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
         </div>
         <div>
-          Comments...
+          <MdModeComment></MdModeComment>
         </div>
       </div>
       <div className="flex flex-col items-center mr-2">
         <p className="text-2xl">...</p>
-        <div className="text-2xl mt-auto mb-auto">
-          <button>U</button>
-          <p>0</p>
-          <button>D</button>
+        <div className="text-2xl mt-auto mb-auto flex flex-col items-center">
+          <button><FaAngleUp></FaAngleUp></button>
+          <p className="text-center">0</p>
+          <button><FaAngleDown></FaAngleDown></button>
         </div>
       </div>
     </div>
