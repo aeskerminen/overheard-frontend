@@ -8,7 +8,7 @@ const testPost = {
   location: 'here',
   channel: 'main',
   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel dapibus dui. Donec sed turpis eu nulla pulvinar pulvinar. Donec in tortor tempus, egestas diam eget, consequat dui. Cras elit libero, euismod id malesuada in, tempus sed justo. Aenean ut interdum massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-  createdAt: '',
+  createdAt: '1h',
 }
 
 const Post = (props) => {
@@ -22,19 +22,15 @@ const Post = (props) => {
     return <div>Loading...</div>
   else {
     return (
-      <div className="p-2 bg-white shadow-lg rounded self-center flex flex-row gap-4" style={{ minWidth: '35rem', maxWidth: '35rem', maxHeight: '30rem' }}>
+      <div className="p-2 bg-white shadow-lg rounded self-center flex flex-row gap-4" style={{ minWidth: '5rem', maxWidth: '35rem', maxHeight: '15rem' }}>
         <div className="flex flex-col justify-between p-2 gap-2">
           <div className="flex items-center gap-2">
-            <p className="p-1 bg-slate-800 text-white rounded-xl text-md">@{post.channel}</p>
+            <p className="p-1 bg-slate-800 text-white rounded-xl text-sm">@{post.channel}</p>
             <p>{post.location}</p>
             <p>{post.createdAt}</p>
           </div>
-          <div className="">
-            <p className="text-lg">{post.content}</p>
-          </div>
-          <div>
-            <MdModeComment></MdModeComment>
-          </div>
+          <p className="text-md" style={{width: 'calc(100%)', textOverflow: 'ellipsis', overflow: 'hidden'}}>{post.content}</p>
+          <MdModeComment className="self-start m-0" size={30}></MdModeComment>
         </div>
         <div className="flex flex-col items-center mr-2">
           <p className="text-2xl">...</p>
