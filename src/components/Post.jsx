@@ -13,15 +13,15 @@ const Post = (props) => {
         return <div>Loading...</div>
     else {
         return (
-            <div className="mr-2 ml-2 p-2 bg-gray-300 shadow-lg self-center rounded flex flex-row gap-4" style={{ minWidth: '5rem', maxWidth: '35rem', maxHeight: '15rem' }}>
-                <div className="flex flex-col justify-between p-2 gap-2">
+            <div className="mr-2 ml-2 p-2 bg-gray-300 shadow-lg self-center rounded flex flex-row gap-4" style={{ minWidth: '25rem', maxWidth: '25rem', minHeight: '10rem', maxHeight: '15rem' }}>
+                <div className="flex flex-col p-2 gap-2 grow">
                     <div className="flex items-center gap-2">
                         <p className="p-1 bg-slate-800 text-white rounded-xl text-sm">@{post.channel}</p>
                         <p>{post.location}</p>
                         <p>{post.createdAt}</p>
                     </div>
                     <p className="text-md" style={{ width: 'calc(100%)', textOverflow: 'ellipsis', overflow: 'hidden' }}>{post.content}</p>
-                    <MdModeComment className="self-start m-0" size={30}></MdModeComment>
+                    <MdModeComment className="self-start mt-auto m-0" size={30}></MdModeComment>
                 </div>
                 <div className="flex flex-col items-center mr-2">
                     <p className="text-2xl">...</p>
