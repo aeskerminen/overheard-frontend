@@ -1,6 +1,7 @@
 const Login = () => {
+    console.log("LOGIN")
     return (
-        <div>LOGIN</div>
+        <div className="bg-black w-full h-full">LOGIN</div>
     )
 }
 
