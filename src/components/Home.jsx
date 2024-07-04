@@ -1,24 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Post from "./Post";
 
 import { IoMdClose } from "react-icons/io";
 
-import { createPost } from "../services/serviceHandler";
-
-const testPost = {
-    location: 'here',
-    channel: 'main',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel dapibus dui. Donec sed turpis eu nulla pulvinar pulvinar. Donec in tortor tempus, egestas diam eget, consequat dui. Cras elit libero, euismod id malesuada in, tempus sed justo. Aenean ut interdum massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-    createdAt: '1h',
-  }
+import { createPost, getPosts } from "../services/serviceHandler";
 
 const Home = () => {
-    const [posts, setPosts] = useState([1, 2, 3, 4, 5, 6])
+    const [posts, setPosts] = useState([])
     const [location, setLocation] = useState("Locating...");
 
     const [creationModal, setCreationModal] = useState(false)
     
     const [content, setContent] = useState("")
+
+    useEffect(() => {
+        getPosts().then(result => {
+            console.log(result.data)
+            setPosts(result.data)
+        })
+    }, [])
 
     const handleCreatePost = (e) => {
         e.preventDefault()
@@ -43,7 +43,12 @@ const Home = () => {
                 </div>
 
                 {posts.map((p, i) =>
-                    <Post key={i} post={testPost}></Post>
+                    <Post key={i} post={{
+                        location: 'here',
+                        channel: 'main',
+                        content: p.content,
+                        createdAt: '1h',
+                      }}></Post>
                 )}
             </div>
             {creationModal &&

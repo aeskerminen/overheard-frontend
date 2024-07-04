@@ -17,4 +17,9 @@ const createPost = (content) => {
     return req.then()
 }
 
-export {loginHandler, registerHandler, createPost}
+const getPosts = () => {
+    const req = axios.get(`${BASE_URL}/posts`, {withCredentials: true})
+    return req.then()
+}
+
+export {loginHandler, registerHandler, createPost, getPosts}
