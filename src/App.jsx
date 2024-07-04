@@ -55,7 +55,7 @@ const App = () => {
       <div className="flex flex-row justify-center items-center p-2 bg-gray-400">
         <h1>{location}</h1>
       </div>
-      <div className="flex flex-col grow flex-nowrap gap-2 overflow-y-scroll">
+      <div className="flex flex-col grow flex-nowrap gap-2 pb-2 overflow-y-scroll">
         <div className="bg-gray-400 p-2 flex gap-2 justify-center">
           <button className="p-2 bg-gray-500 rounded-full text-gray-200 border-2 border-orange-400">Newest</button>
           <button className="p-2 bg-gray-500 rounded-full text-gray-200 border-2 border-orange-400">Most commented</button>
