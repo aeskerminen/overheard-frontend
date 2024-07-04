@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Post from "./Post";
 
 const testPost = {
