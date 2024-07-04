@@ -23,17 +23,17 @@ const getPosts = () => {
 }
 
 const upvotePost = (identifier) => {
-    const req = axios.post(`${BASE_URL}/posts/${identifier}/upvote`, { withCredentials: true })
+    const req = axios.post(`${BASE_URL}/posts/${identifier}/upvote`, {}, { withCredentials: true })
     return req.then()
 }
 
 const downvotePost = (identifier) => {
-    const req = axios.post(`${BASE_URL}/posts/${identifier}/downvote`, { withCredentials: true })
+    const req = axios.post(`${BASE_URL}/posts/${identifier}/downvote`, {}, { withCredentials: true })
     return req.then()
 }
 
 const getVotes = (identifier) => {
-    const req = axios.post(`${BASE_URL}/posts/${identifier}/votes`, {withCredentials: true})
+    const req = axios.get(`${BASE_URL}/posts/${identifier}/votes`, {withCredentials: true})
     return req.then()
 }
 
