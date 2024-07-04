@@ -12,4 +12,9 @@ const registerHandler = (email, password) => {
     return req.then()
 }
 
-export default {loginHandler, registerHandler}
+const createPost = (content) => {
+    const req = axios.post(`${BASE_URL}/post`, {content}, {withCredentials: true})
+    return req.then()
+}
+
+export {loginHandler, registerHandler, createPost}

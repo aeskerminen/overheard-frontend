@@ -1,6 +1,10 @@
 import { useState } from "react";
 import Post from "./Post";
 
+import { IoMdClose } from "react-icons/io";
+
+import { createPost } from "../services/serviceHandler";
+
 const testPost = {
     location: 'here',
     channel: 'main',
@@ -11,6 +15,20 @@ const testPost = {
 const Home = () => {
     const [posts, setPosts] = useState([1, 2, 3, 4, 5, 6])
     const [location, setLocation] = useState("Locating...");
+
+    const [creationModal, setCreationModal] = useState(false)
+    
+    const [content, setContent] = useState("")
+
+    const handleCreatePost = (e) => {
+        e.preventDefault()
+
+        createPost(content).then(result => {
+            console.log(result)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
 
     return (
         <div className="bg-white h-full w-full flex flex-col justify-center ">
@@ -28,8 +46,19 @@ const Home = () => {
                     <Post key={i} post={testPost}></Post>
                 )}
             </div>
+            {creationModal &&
+                <div style={{zIndex: 999, backdropFilter: 'blur(3px)'}} className="absolute rounded w-full h-full flex justify-center items-center">
+                        <div className="bg-white rounded shadow-lg flex flex-col p-4">
+                            <button onClick={() => setCreationModal(false)} className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 active:bg-gray-300 self-start"><IoMdClose size={25}></IoMdClose></button>
+                            <form className="flex gap-2 mt-4" onSubmit={handleCreatePost}>
+                                <input placeholder="What have you heard...?" className="p-2 text-2xl bg-gray-100 rounded-md" type="text" name="content" onChange={e => setContent(e.target.value)} value={content}></input>
+                                <input className="p-2 text-lg bg-gray-100 hover:bg-gray-200 active:bg-gray-300 self-center rounded-sm" type="submit" name="submit" value="Post..."></input>
+                            </form>
+                        </div>
+                </div>
+            }
             <div className="absolute p-2 flex justify-center items-center w-full" style={{ top: '90%' }}>
-                <button className="p-3 bg-white hover:bg-slate-50 active:bg-slate-100 rounded-full aspect-square flex items-center text-2xl">+</button>
+                <button onClick={() => setCreationModal(true)} className="p-3 bg-white hover:bg-slate-50 active:bg-slate-100 rounded-full aspect-square flex items-center text-2xl">+</button>
             </div>
         </div>
     )
