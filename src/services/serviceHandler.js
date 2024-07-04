@@ -12,8 +12,8 @@ const registerHandler = (email, password) => {
     return req.then()
 }
 
-const createPost = (content) => {
-    const req = axios.post(`${BASE_URL}/post`, {content}, {withCredentials: true})
+const createPost = (content, channel) => {
+    const req = axios.post(`${BASE_URL}/post`, {content, channel}, {withCredentials: true})
     return req.then()
 }
 

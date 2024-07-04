@@ -12,6 +12,7 @@ const Home = () => {
     const [creationModal, setCreationModal] = useState(false)
     
     const [content, setContent] = useState("")
+    const [channel, setChannel] = useState("")
 
     useEffect(() => {
         getPosts().then(result => {
@@ -23,7 +24,7 @@ const Home = () => {
     const handleCreatePost = (e) => {
         e.preventDefault()
 
-        createPost(content).then(result => {
+        createPost(content, channel).then(result => {
             console.log(result)
         }).catch(err => {
             console.log(err)
@@ -57,6 +58,7 @@ const Home = () => {
                             <button onClick={() => setCreationModal(false)} className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 active:bg-gray-300 self-start"><IoMdClose size={25}></IoMdClose></button>
                             <form className="flex gap-2 mt-4" onSubmit={handleCreatePost}>
                                 <input placeholder="What have you heard...?" className="p-2 text-2xl bg-gray-100 rounded-md" type="text" name="content" onChange={e => setContent(e.target.value)} value={content}></input>
+                                <input placeholder="Choose a channel..." className="p-2 text-2xl bg-gray-100 rounded-md" type="text" name="channel" onChange={e => setChannel(e.target.value)} value={channel}></input>
                                 <input className="p-2 text-lg bg-gray-100 hover:bg-gray-200 active:bg-gray-300 self-center rounded-sm" type="submit" name="submit" value="Post..."></input>
                             </form>
                         </div>
