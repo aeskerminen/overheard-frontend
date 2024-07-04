@@ -32,10 +32,5 @@ const downvotePost = (identifier) => {
     return req.then()
 }
 
-const unvotePost = (identifier, liked) => {
-    const req = axios.post(`${BASE_URL}/posts/${identifier}/unvote`, { withCredentials: true })
-    return req.then()
-}
 
-
-export { loginHandler, registerHandler, createPost, getPosts, upvotePost, downvotePost, unvotePost }
+export { loginHandler, registerHandler, createPost, getPosts, upvotePost, downvotePost }

@@ -9,6 +9,8 @@ const Post = (props) => {
     const [upvoted, setUpvoted] = useState(false)
     const [downvoted, setDownvoted] = useState(false)
 
+    const [vote, setVotes] = useState(0)
+
     useEffect(() => {
         setPost(props.post)
         console.log(props.post)
