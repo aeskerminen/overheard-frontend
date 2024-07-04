@@ -75,7 +75,7 @@ const Home = () => {
                 </div>
             }
             <div className="absolute p-2 flex justify-center items-center w-full" style={{ top: '90%' }}>
-                <button onClick={() => setCreationModal(true)} className="p-3 bg-white hover:bg-slate-50 active:bg-slate-100 rounded-full aspect-square flex items-center text-2xl">+</button>
+                <button onClick={() => setCreationModal(true)} style={{backdropFilter: 'brightness(50%)'}} className="p-3 border-4 rounded-full aspect-square flex items-center text-2xl text-white">+</button>
             </div>
         </div>
     )
