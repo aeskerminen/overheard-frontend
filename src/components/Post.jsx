@@ -1,13 +1,42 @@
 import { useEffect, useState } from "react"
 import { FaAngleDown, FaAngleUp } from "react-icons/fa"
 import { MdModeComment } from "react-icons/md"
+import { upvotePost, downvotePost }from "../services/serviceHandler"
 
 const Post = (props) => {
     const [post, setPost] = useState(undefined)
 
+    const [upvoted, setUpvoted] = useState(false)
+    const [downvoted, setDownvoted] = useState(false)
+
     useEffect(() => {
         setPost(props.post)
+        console.log(props.post)
     }, [props.post])
+
+    const handleUpvotePost = () => {
+        if(!downvoted) {
+            if(upvoted) {
+                downvotePost(post.identifier);
+                setUpvoted(false);
+            } else {
+                upvotePost(post.identifier);
+                setUpvoted(true);
+            }
+        }   
+    }
+
+    const handleDownvotePost = () => {
+        if(!upvoted) {
+            if(downvoted) {
+                upvotePost(post.identifier)
+                setDownvoted(false);
+            } else {
+                downvotePost(post.identifier)
+                setDownvoted(true)
+            }
+        }
+    }
 
     if (post === undefined)
         return <div>Loading...</div>
@@ -26,9 +55,9 @@ const Post = (props) => {
                 <div className="flex flex-col items-center mr-2">
                     <p className="text-2xl text-white">...</p>
                     <div className="text-2xl mt-auto mb-auto flex flex-col items-center">
-                        <button><FaAngleUp fill="white"></FaAngleUp></button>
+                        <button disabled={downvoted} onClick={() => handleUpvotePost()}><FaAngleUp fill="white"></FaAngleUp></button>
                         <p className="text-center text-white">0</p>
-                        <button><FaAngleDown fill="white"></FaAngleDown></button>
+                        <button disabled={upvoted} onClick={() => handleDownvotePost()}><FaAngleDown fill="white"></FaAngleDown></button>
                     </div>
                 </div>
             </div>

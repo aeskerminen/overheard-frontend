@@ -53,6 +53,7 @@ const Home = () => {
                         content: p.content,
                         color: p.color,
                         createdAt: '1h',
+                        identifier: p.identifier
                       }}></Post>
                 )}
             </div>
