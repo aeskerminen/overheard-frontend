@@ -13,6 +13,7 @@ const Home = () => {
     
     const [content, setContent] = useState("")
     const [channel, setChannel] = useState("")
+    const [color, setColor] = useState("#000000")
 
     useEffect(() => {
         getPosts().then(result => {
@@ -46,8 +47,9 @@ const Home = () => {
                 {posts.map((p, i) =>
                     <Post key={i} post={{
                         location: 'here',
-                        channel: 'main',
+                        channel: p.channel,
                         content: p.content,
+                        color: p.color,
                         createdAt: '1h',
                       }}></Post>
                 )}
@@ -59,6 +61,12 @@ const Home = () => {
                             <form className="flex gap-2 mt-4" onSubmit={handleCreatePost}>
                                 <input placeholder="What have you heard...?" className="p-2 text-2xl bg-gray-100 rounded-md" type="text" name="content" onChange={e => setContent(e.target.value)} value={content}></input>
                                 <input placeholder="Choose a channel..." className="p-2 text-2xl bg-gray-100 rounded-md" type="text" name="channel" onChange={e => setChannel(e.target.value)} value={channel}></input>
+                                <div className="p-2 bg-gray-100 rounded-full">
+                                    <button onClick={() => setColor('#000000')} className="p-6 rounded-full bg-black border-4 border-white"></button>
+                                    <button onClick={() => setColor('#F97316')} className="p-6 rounded-full bg-orange-500 border-4 border-white"></button>
+                                    <button onClick={() => setColor('#22C55E')} className="p-6 rounded-full bg-green-500 border-4 border-white"></button>
+                                    <button onClick={() => setColor('#A855F7')} className="p-6 rounded-full bg-purple-500 border-4 border-white"></button>
+                                </div>
                                 <input className="p-2 text-lg bg-gray-100 hover:bg-gray-200 active:bg-gray-300 self-center rounded-sm" type="submit" name="submit" value="Post..."></input>
                             </form>
                         </div>
