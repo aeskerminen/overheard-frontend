@@ -39,9 +39,9 @@ const Home = () => {
             </div>
             <div className="flex flex-col grow flex-nowrap gap-2 pb-2 overflow-y-scroll">
                 <div style={{backgroundColor: '#3D3D3D'}} className=" p-2 flex gap-2 justify-center">
-                    <button style={{backgroundColor: '#5F5F5F', color: '#9F9F9F'}} className="p-2 font-bold rounded-full text-gray-200 border-2 border-orange-600">Newest</button>
-                    <button style={{backgroundColor: '#5F5F5F', color: '#9F9F9F'}} className="p-2 font-bold rounded-full text-gray-200 border-2 border-orange-600">Most commented</button>
-                    <button style={{backgroundColor: '#5F5F5F', color: '#9F9F9F'}} className="p-2 font-bold rounded-full text-gray-200 border-2 border-orange-600">Most liked</button>
+                    <button style={{backgroundColor: '#5F5F5F', color: '#9F9F9F', borderColor: '#FF9703'}} className="p-2 font-bold rounded-full text-gray-200 border-2">Newest</button>
+                    <button style={{backgroundColor: '#5F5F5F', color: '#9F9F9F', borderColor: '#FF9703'}} className="p-2 font-bold rounded-full text-gray-200 border-2">Most commented</button>
+                    <button style={{backgroundColor: '#5F5F5F', color: '#9F9F9F', borderColor: '#FF9703'}} className="p-2 font-bold rounded-full text-gray-200 border-2">Most liked</button>
                 </div>
 
                 {posts.map((p, i) =>
@@ -61,7 +61,7 @@ const Home = () => {
                             <form className="flex gap-2 mt-4" onSubmit={handleCreatePost}>
                                 <input placeholder="What have you heard...?" className="p-2 text-2xl bg-gray-100 rounded-md" type="text" name="content" onChange={e => setContent(e.target.value)} value={content}></input>
                                 <input placeholder="Choose a channel..." className="p-2 text-2xl bg-gray-100 rounded-md" type="text" name="channel" onChange={e => setChannel(e.target.value)} value={channel}></input>
-                                <div className="p-2 bg-gray-100 rounded-full">
+                                <div className="p-2 bg-gray-100 rounded-md flex justify-center items-center">
                                     <input type="button" onClick={() => setColor('#000000')} className="p-6 rounded-full bg-black border-4 border-white"></input>
                                     <input type="button" onClick={() => setColor('#F97316')} className="p-6 rounded-full bg-orange-500 border-4 border-white"></input>
                                     <input type="button" onClick={() => setColor('#22C55E')} className="p-6 rounded-full bg-green-500 border-4 border-white"></input>
