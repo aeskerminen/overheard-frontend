@@ -20,7 +20,7 @@ const Post = (props) => {
                         <p>{post.location}</p>
                         <p>{post.createdAt}</p>
                     </div>
-                    <p className="text-md" style={{ width: 'calc(100%)', textOverflow: 'ellipsis', overflow: 'hidden' }}>{post.content}</p>
+                    <p className="text-md" style={{ color: post.color, width: 'calc(100%)', textOverflow: 'ellipsis', overflow: 'hidden' }}>{post.content}</p>
                     <MdModeComment className="self-start mt-auto m-0" size={30}></MdModeComment>
                 </div>
                 <div className="flex flex-col items-center mr-2">
