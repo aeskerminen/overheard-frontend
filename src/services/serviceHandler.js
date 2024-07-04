@@ -32,5 +32,10 @@ const downvotePost = (identifier) => {
     return req.then()
 }
 
+const getVotes = (identifier) => {
+    const req = axios.post(`${BASE_URL}/posts/${identifier}/votes`, {withCredentials: true})
+    return req.then()
+}
 
-export { loginHandler, registerHandler, createPost, getPosts, upvotePost, downvotePost }
+
+export { loginHandler, registerHandler, createPost, getPosts, upvotePost, downvotePost, getVotes }

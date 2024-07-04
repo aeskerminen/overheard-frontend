@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { FaAngleDown, FaAngleUp } from "react-icons/fa"
 import { MdModeComment } from "react-icons/md"
-import { upvotePost, downvotePost }from "../services/serviceHandler"
+import { upvotePost, downvotePost, getVotes }from "../services/serviceHandler"
 
 const Post = (props) => {
     const [post, setPost] = useState(undefined)
@@ -14,6 +14,10 @@ const Post = (props) => {
     useEffect(() => {
         setPost(props.post)
         console.log(props.post)
+
+        getVotes().then(result => {
+            setVotes(result.data)
+        })
     }, [props.post])
 
     const handleUpvotePost = () => {
