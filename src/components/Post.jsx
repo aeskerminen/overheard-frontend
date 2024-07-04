@@ -9,7 +9,7 @@ const Post = (props) => {
     const [upvoted, setUpvoted] = useState(false)
     const [downvoted, setDownvoted] = useState(false)
 
-    const [vote, setVotes] = useState(0)
+    const [votes, setVotes] = useState(0)
 
     useEffect(() => {
         setPost(props.post)
@@ -58,7 +58,7 @@ const Post = (props) => {
                     <p className="text-2xl text-white">...</p>
                     <div className="text-2xl mt-auto mb-auto flex flex-col items-center">
                         <button disabled={downvoted} onClick={() => handleUpvotePost()}><FaAngleUp fill="white"></FaAngleUp></button>
-                        <p className="text-center text-white">0</p>
+                        <p className="text-center text-white">{votes}</p>
                         <button disabled={upvoted} onClick={() => handleDownvotePost()}><FaAngleDown fill="white"></FaAngleDown></button>
                     </div>
                 </div>
