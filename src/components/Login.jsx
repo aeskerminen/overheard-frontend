@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {loginHandler, registerHandler} from '../services/serviceHandler.js'
 
 const Login = () => {
     const [curUsername, setCurUsername] = useState("")
@@ -14,7 +15,7 @@ const Login = () => {
         form.append("username", curUsername);
         form.append("password", curPassword)
 
-        tryLogin(curUsername, curPassword).then(resp => {
+        loginHandler(curUsername, curPassword).then(resp => {
             navigate("/home")
         })
     }
@@ -25,8 +26,10 @@ const Login = () => {
         let form = new FormData()
         form.append("username", curUsername);
         form.append("password", curPassword)
-
-      
+        
+        registerHandler(curUsername, curPassword).then(resp => {
+            console.log(resp)
+        })
     }
 
     return (
