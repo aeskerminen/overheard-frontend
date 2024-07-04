@@ -33,15 +33,15 @@ const Home = () => {
     }
 
     return (
-        <div className="bg-white h-full w-full flex flex-col justify-center ">
-            <div className="flex flex-row justify-center items-center p-2 bg-gray-400">
+        <div style={{backgroundColor: '#151515'}} className="h-full w-full flex flex-col justify-center ">
+            <div className="flex flex-row justify-center items-center p-2 text-white" style={{backgroundColor: '#3D3D3D'}}>
                 <h1>{location}</h1>
             </div>
             <div className="flex flex-col grow flex-nowrap gap-2 pb-2 overflow-y-scroll">
-                <div className="bg-gray-400 p-2 flex gap-2 justify-center">
-                    <button className="p-2 bg-gray-500 rounded-full text-gray-200 border-2 border-orange-400">Newest</button>
-                    <button className="p-2 bg-gray-500 rounded-full text-gray-200 border-2 border-orange-400">Most commented</button>
-                    <button className="p-2 bg-gray-500 rounded-full text-gray-200 border-2 border-orange-400">Most liked</button>
+                <div style={{backgroundColor: '#3D3D3D'}} className=" p-2 flex gap-2 justify-center">
+                    <button style={{backgroundColor: '#5F5F5F', color: '#9F9F9F'}} className="p-2 font-bold rounded-full text-gray-200 border-2 border-orange-600">Newest</button>
+                    <button style={{backgroundColor: '#5F5F5F', color: '#9F9F9F'}} className="p-2 font-bold rounded-full text-gray-200 border-2 border-orange-600">Most commented</button>
+                    <button style={{backgroundColor: '#5F5F5F', color: '#9F9F9F'}} className="p-2 font-bold rounded-full text-gray-200 border-2 border-orange-600">Most liked</button>
                 </div>
 
                 {posts.map((p, i) =>
