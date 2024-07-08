@@ -54,7 +54,7 @@ const Post = (props) => {
         return <div>Loading...</div>
     else {
         return (
-            <div className="mr-2 ml-2 p-2 shadow-lg self-center rounded flex flex-row gap-4" style={{ backgroundColor: '#3D3D3D', minWidth: '25rem', maxWidth: '25rem', minHeight: '10rem', maxHeight: '15rem' }}>
+            <div className="mr-2 ml-2 p-2 shadow-lg self-center rounded flex flex-row gap-4" style={{ backgroundColor: '#3D3D3D', minWidth: '20rem', maxWidth: '25rem', minHeight: '10rem', maxHeight: '15rem' }}>
                 <div className="flex flex-col p-2 gap-2 grow">
                     <div className="flex items-center gap-2 text-white">
                         <p style={{backgroundColor: '#252525'}} className="p-1 rounded-xl text-sm">@{post.channel}</p>
