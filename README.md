@@ -1,8 +1,15 @@
-# React + Vite
+# Overheard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overheard is my vision of a local anonymous social platform (like Jodel...)
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [x] Primitive user system.
+- [x] Posts with text content.
+- [x] Customizable posts.
+- [x] Voting system.
+- [ ] Tags.
+- [ ] Polls.
+- [ ] Videos.
+- [ ] Location -based mapping of content.
+- [ ] Cutomized feed based on channels that you're subscribed to.    
