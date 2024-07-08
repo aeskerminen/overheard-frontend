@@ -52,7 +52,7 @@ const Home = () => {
                         channel: p.channel,
                         content: p.content,
                         color: p.color,
-                        createdAt: '1h',
+                        createdAt: p.createdAt,
                         identifier: p.identifier
                       }}></Post>
                 )}

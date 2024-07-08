@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { FaAngleDown, FaAngleUp } from "react-icons/fa"
 import { MdModeComment } from "react-icons/md"
 import { upvotePost, downvotePost, getVotes }from "../services/serviceHandler"
+import { getHowLongAgo } from "../utils/time"
 
 const Post = (props) => {
     const [post, setPost] = useState(undefined)
@@ -26,9 +27,11 @@ const Post = (props) => {
             if(upvoted) {
                 downvotePost(post.identifier);
                 setUpvoted(false);
+                setVotes(votes - 1)
             } else {
                 upvotePost(post.identifier);
                 setUpvoted(true);
+                setVotes(votes + 1)
             }
         }   
     }
@@ -38,9 +41,11 @@ const Post = (props) => {
             if(downvoted) {
                 upvotePost(post.identifier)
                 setDownvoted(false);
+                setVotes(votes + 1)
             } else {
                 downvotePost(post.identifier)
                 setDownvoted(true)
+                setVotes(votes - 1)
             }
         }
     }
@@ -54,7 +59,7 @@ const Post = (props) => {
                     <div className="flex items-center gap-2 text-white">
                         <p style={{backgroundColor: '#252525'}} className="p-1 rounded-xl text-sm">@{post.channel}</p>
                         <p>{post.location}</p>
-                        <p>{post.createdAt}</p>
+                        <p>{getHowLongAgo(post.createdAt)}</p>
                     </div>
                     <p className="text-md" style={{ color: post.color, width: 'calc(100%)', textOverflow: 'ellipsis', overflow: 'hidden' }}>{post.content}</p>
                     <MdModeComment className="self-start mt-auto m-0" size={25} fill="#AFAFAF"></MdModeComment>
