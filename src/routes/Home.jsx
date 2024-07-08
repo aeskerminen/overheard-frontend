@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Post from "./Post";
+import Post from "../components/Post";
 
 import { IoMdClose } from "react-icons/io";
 

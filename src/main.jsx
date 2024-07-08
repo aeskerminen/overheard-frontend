@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom/client'
 import './index.css'
 
-import Login from './components/Login.jsx'
-import Home from './components/Home.jsx'
+import Login from './routes/Login.jsx'
+import Home from './routes/Home.jsx'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 const router = createBrowserRouter([
