@@ -88,7 +88,7 @@ const Home = () => {
                 <button onClick={() => setCreationModal(true)} style={{ backdropFilter: 'brightness(50%)' }} className="p-3 border-4 rounded-full aspect-square flex items-center text-2xl text-white absolute">+</button>
             </div>
 
-            <div className="flex flex-row justify-center items-center p-2 text-white" style={{ backgroundColor: '#3D3D3D' }}>
+            <div className="flex flex-row justify-center items-center p-1 text-white" style={{ backgroundColor: '#3D3D3D' }}>
                 <div className="flex justify-center items-center gap-4">
                     <div className="p-2 text-lg flex flex-col justify-center items-center gap-1 text-gray-300 hover:text-gray-50">
                         <div className="pl-4 pr-4 pt-1 pb-1 rounded-full flex justify-center items-center" style={tab === "home" ? { backgroundColor: 'orangered' } : {}} onClick={() => setTab("home")}>
