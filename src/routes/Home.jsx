@@ -3,11 +3,6 @@ import Post from "../components/Post";
 
 import { IoMdClose } from "react-icons/io";
 
-import { TiHome } from "react-icons/ti";
-import { FaSearch } from "react-icons/fa";
-import { GoBellFill } from "react-icons/go";
-import { IoPerson } from "react-icons/io5";
-
 
 import { createPost, getPosts } from "../services/serviceHandler";
 
@@ -22,9 +17,6 @@ const Home = () => {
     const [color, setColor] = useState("#000000")
 
     const [filter, setFilter] = useState("newest")
-
-    // home, channels, inbox, me
-    const [tab, setTab] = useState("home")
 
     useEffect(() => {
         getPosts().then(result => {
@@ -44,12 +36,9 @@ const Home = () => {
     }
 
     return (
-        <div style={{ backgroundColor: '#151515' }} className="h-full w-full flex flex-col justify-center ">
-            <div className="flex flex-row justify-center items-center p-2 text-white" style={{ backgroundColor: '#3D3D3D' }}>
-                <h1>{location}</h1>
-            </div>
-            <div className="flex flex-col grow flex-nowrap gap-2 pb-2 overflow-y-scroll">
-                <div style={{ backgroundColor: '#3D3D3D' }} className=" p-2 flex gap-2 justify-center">
+        <div style={{ backgroundColor: '#151515'}} className="overflow-y-scroll">
+            <div className="flex flex-col grow flex-nowrap gap-2 mb-2 overflow-y-scroll">
+                <div style={{ backgroundColor: '#3D3D3D' }} className="p-2 flex gap-2 justify-center">
                     <button onClick={() => setFilter("newest")} style={{ backgroundColor: '#5F5F5F', color: '#9F9F9F', borderColor: '#FF9703' }} className={`p-3 font-bold rounded-full text-gray-200 ${filter === 'newest' ? "border-2" : "border-none"}`}>Newest</button>
                     <button onClick={() => setFilter("mcommented")} style={{ backgroundColor: '#5F5F5F', color: '#9F9F9F', borderColor: '#FF9703' }} className={`p-3 font-bold rounded-full text-gray-200 ${filter === 'mcommented' ? "border-2" : "border-none"}`}>Most commented</button>
                     <button onClick={() => setFilter("mliked")} style={{ backgroundColor: '#5F5F5F', color: '#9F9F9F', borderColor: '#FF9703' }} className={`p-3 font-bold rounded-full text-gray-200 ${filter === 'mliked' ? "border-2" : "border-none"}`}>Most liked</button>
@@ -88,34 +77,7 @@ const Home = () => {
                 <button onClick={() => setCreationModal(true)} style={{ backdropFilter: 'brightness(50%)' }} className="p-3 border-4 rounded-full aspect-square flex items-center text-2xl text-white absolute">+</button>
             </div>
 
-            <div className="flex flex-row justify-center items-center p-1 text-white" style={{ backgroundColor: '#3D3D3D' }}>
-                <div className="flex justify-center items-center gap-4">
-                    <div className="p-2 text-lg flex flex-col justify-center items-center gap-1 text-gray-300 hover:text-gray-50">
-                        <div className="pl-4 pr-4 pt-1 pb-1 rounded-full flex justify-center items-center" style={tab === "home" ? { backgroundColor: 'orangered' } : {}} onClick={() => setTab("home")}>
-                            <TiHome size={30}></TiHome>
-                        </div>
-                        <p>Home</p>
-                    </div>
-                    <div className="p-2 text-lg flex flex-col justify-center items-center gap-1 text-gray-300 hover:text-gray-50" >
-                        <div className="pl-4 pr-4 pt-1 pb-1 rounded-full flex justify-center items-center" style={tab === "channels" ? { backgroundColor: 'orangered' } : {}} onClick={() => setTab("channels")}>
-                            <FaSearch size={30}></FaSearch>
-                        </div>
-                        <p>Channels</p>
-                    </div>
-                    <div className="p-2 text-lg flex flex-col justify-center items-center gap-1 text-gray-300 hover:text-gray-50" >
-                        <div className="pl-4 pr-4 pt-1 pb-1 rounded-full flex justify-center items-center" style={tab === "inbox" ? { backgroundColor: 'orangered' } : {}} onClick={() => setTab("inbox")}>
-                            <GoBellFill size={30}></GoBellFill>
-                        </div>
-                        <p>Inbox</p>
-                    </div>
-                    <div className="p-2 text-lg flex flex-col justify-center items-center gap-1 text-gray-300 hover:text-gray-50" >
-                        <div className="pl-4 pr-4 pt-1 pb-1 rounded-full flex justify-center items-center" style={tab === "me" ? { backgroundColor: 'orangered' } : {}} onClick={() => setTab("me")}>
-                            <IoPerson size={30}></IoPerson>
-                        </div>
-                        <p>Me</p>
-                    </div>
-                </div>
-            </div>
+           
         </div>
     )
 }
