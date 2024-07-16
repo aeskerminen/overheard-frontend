@@ -14,10 +14,8 @@ const Post = (props) => {
 
     useEffect(() => {
         setPost(props.post)
-        console.log(props.post)
 
         getVotes(props.post.identifier).then(result => {
-            console.log(result.data)
             setVotes(result.data[0].votes)
         })
     }, [props.post])
