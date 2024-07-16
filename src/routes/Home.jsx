@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
 import Post from "../components/Post";
 
-import { getPosts } from "../services/serviceHandler";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { switchModal } from "../reducers/creationModalSlice";
+import { fetchPosts } from "../reducers/postsSlice";
 
 const Home = () => {
-  const [posts, setPosts] = useState([]);
+  const posts = useSelector((state) => state.posts);
 
   const [filter, setFilter] = useState("newest");
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getPosts().then((result) => {
-      console.log(result.data);
-      setPosts(result.data);
-    });
+    dispatch(fetchPosts());
   }, []);
 
   return (
