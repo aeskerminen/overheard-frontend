@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
-import { createPost } from "../services/serviceHandler";
 import { useSelector, useDispatch } from "react-redux";
 import { switchModal } from "../reducers/creationModalSlice";
+import { addPost } from "../reducers/postsSlice";
 
 const CreationModal = () => {
   const [content, setContent] = useState("");
@@ -17,13 +17,7 @@ const CreationModal = () => {
   const handleCreatePost = (e) => {
     e.preventDefault();
 
-    createPost(content, channel, color)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(addPost(content, channel, color));
   };
 
   if (!state.visible) return null;
