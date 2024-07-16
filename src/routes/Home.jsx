@@ -14,7 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchPosts());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div
@@ -76,7 +76,7 @@ const Home = () => {
               content: p.content,
               color: p.color,
               createdAt: p.createdAt,
-              identifier: p.identifier,
+              id: p.identifier,
             }}
           ></Post>
         ))}
