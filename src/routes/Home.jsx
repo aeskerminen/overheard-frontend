@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import Post from "../components/Post";
 
 import { getPosts } from "../services/serviceHandler";
+import { useDispatch } from "react-redux";
+import { switchModal } from "../reducers/creationModalSlice";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
 
   const [filter, setFilter] = useState("newest");
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getPosts().then((result) => {
@@ -86,8 +90,7 @@ const Home = () => {
       >
         <button
           onClick={() => {
-           // setCreationModal(true);
-            console.log("YES");
+            dispatch(switchModal());
           }}
           style={{ backdropFilter: "brightness(50%)" }}
           className="p-3 border-4 rounded-full aspect-square flex items-center text-2xl text-white absolute"

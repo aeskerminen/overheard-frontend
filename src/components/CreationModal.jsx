@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { createPost } from "../services/serviceHandler";
+import { useSelector, useDispatch } from "react-redux";
+import { switchModal } from "../reducers/creationModalSlice";
 
 const CreationModal = () => {
   const [content, setContent] = useState("");
@@ -8,7 +10,9 @@ const CreationModal = () => {
   const [color, setColor] = useState("#000000");
 
   const [location, setLocation] = useState("Locating...");
-  const [creationModal, setCreationModal] = useState(false);
+
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.modal);
 
   const handleCreatePost = (e) => {
     e.preventDefault();
@@ -21,6 +25,9 @@ const CreationModal = () => {
         console.log(err);
       });
   };
+
+  if (!state.visible) return null;
+
   return (
     <div
       style={{ zIndex: 999, backdropFilter: "blur(3px)" }}
@@ -28,7 +35,7 @@ const CreationModal = () => {
     >
       <div className="absolute bg-white rounded shadow-lg flex flex-col p-4">
         <button
-          // onClick={() => setCreationModal(false)}
+          onClick={() => dispatch(switchModal())}
           className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 active:bg-gray-300 self-start"
         >
           <IoMdClose size={25}></IoMdClose>
