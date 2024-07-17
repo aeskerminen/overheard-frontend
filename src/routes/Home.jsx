@@ -72,10 +72,7 @@ const Home = () => {
             key={i}
             post={{
               location: "here",
-              channel: p.channel,
-              content: p.content,
-              color: p.color,
-              createdAt: p.createdAt,
+            
               id: p.identifier,
             }}
           ></Post>
