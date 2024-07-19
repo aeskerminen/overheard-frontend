@@ -12,4 +12,10 @@
 - [ ] Polls.
 - [ ] Videos.
 - [ ] Location -based mapping of content.
-- [ ] Cutomized feed based on channels that you're subscribed to.    
+- [ ] Cutomized feed based on channels that you're subscribed to.
+
+## The STACK
+
+### React.JS
+### Express.JS
+### Redux Toolkit
