@@ -17,7 +17,7 @@ axios.interceptors.response.use(
 
 const loginHandler = (email, password) => {
   const req = axios.post(
-    `${BASE_URL}/login`,
+    `${BASE_URL}/users/login`,
     { email, password },
     { withCredentials: true }
   );
@@ -25,13 +25,13 @@ const loginHandler = (email, password) => {
 };
 
 const registerHandler = (email, password) => {
-  const req = axios.post(`${BASE_URL}/register`, { email, password });
+  const req = axios.post(`${BASE_URL}/users/register`, { email, password });
   return req.then();
 };
 
 const createPost = (content, channel, color) => {
   const req = axios.post(
-    `${BASE_URL}/post`,
+    `${BASE_URL}/posts`,
     { content, channel, color },
     { withCredentials: true }
   );
