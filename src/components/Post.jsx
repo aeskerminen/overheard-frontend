@@ -10,7 +10,6 @@ const Post = (props) => {
     state.posts.find((p) => p.identifier === props.post.id)
   );
 
-  console.log(post);
 
   const [upvoted, setUpvoted] = useState(false);
   const [downvoted, setDownvoted] = useState(false);

@@ -11,10 +11,27 @@ const postsSlice = createSlice({
     set: (state, action) => {
       return [...action.payload];
     },
+    sort: (state,action) => {
+      const temp = [...state]
+      console.log(action.payload)
+      switch(action.payload) {
+        case 'newest':
+          temp.sort((a,b) => a.createdAt < b.createdAt)
+          break;
+        case 'mcomments':
+          temp.sort((a,b) => a.createdAt < b.createdAt)
+          break;
+        case 'mvotes':
+          temp.sort((a,b) => a.votes.votes < b.votes.votes)
+          break;  
+      }
+
+      return [...temp]
+    }
   },
 });
 
-export const { append, set } = postsSlice.actions;
+export const { append, set, sort } = postsSlice.actions;
 
 export const fetchPosts = () => async (dispatch) => {
   const posts = await (await getPosts()).data;
@@ -26,6 +43,12 @@ export const addPost = (content, channel, color) => {
     console.log(content, channel, color);
     const res = await createPost(content, channel, color);
     dispatch(append(res.data.post));
+  };
+};
+
+export const sortPosts = (filter) => {
+  return async (dispatch) => {
+    dispatch(sort(filter));
   };
 };
 
