@@ -61,6 +61,16 @@ const downvotePost = (identifier) => {
   return req.then();
 };
 
+const unvotePost = (identifier) => {
+  const req = axios.post(
+    `${BASE_URL}/posts/${identifier}/unvote`,
+    {},
+    { withCredentials: true }
+  );
+  return req.then();
+};
+
+
 const getVotes = (identifier) => {
   const req = axios.get(`${BASE_URL}/posts/${identifier}/votes`, {
     withCredentials: true,
@@ -75,5 +85,6 @@ export {
   getPosts,
   upvotePost,
   downvotePost,
+  unvotePost,
   getVotes,
 };

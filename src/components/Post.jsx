@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { MdModeComment } from "react-icons/md";
-import { upvotePost, downvotePost, getVotes } from "../services/serviceHandler";
+import { upvotePost, downvotePost, getVotes, unvotePost } from "../services/serviceHandler";
 import { getHowLongAgo } from "../utils/time";
 import { useSelector } from "react-redux";
 
@@ -9,6 +9,8 @@ const Post = (props) => {
   const post = useSelector((state) =>
     state.posts.find((p) => p.identifier === props.post.id)
   );
+
+  console.log(post);
 
   const [upvoted, setUpvoted] = useState(false);
   const [downvoted, setDownvoted] = useState(false);
@@ -19,12 +21,22 @@ const Post = (props) => {
     getVotes(props.post.id).then((result) => {
       setVotes(result.data[0].votes);
     });
-  }, [props.post]);
+
+    const voteState =
+      post.votes.voters[window.sessionStorage.getItem("userid")];
+    if (voteState !== undefined) {
+      if (voteState === "up") {
+        setUpvoted(true);
+      } else if (voteState === "down") {
+        setDownvoted(true);
+      }
+    }
+  }, [props.post, post]);
 
   const handleUpvotePost = () => {
     if (!downvoted) {
       if (upvoted) {
-        downvotePost(post.identifier);
+        unvotePost(post.identifier);
         setUpvoted(false);
         setVotes(votes - 1);
       } else {
@@ -38,7 +50,7 @@ const Post = (props) => {
   const handleDownvotePost = () => {
     if (!upvoted) {
       if (downvoted) {
-        upvotePost(post.identifier);
+        unvotePost(post.identifier);
         setDownvoted(false);
         setVotes(votes + 1);
       } else {
@@ -93,12 +105,24 @@ const Post = (props) => {
         <div className="flex flex-col items-center mr-2">
           <p className="text-2xl text-white">...</p>
           <div className="text-2xl mt-auto mb-auto flex flex-col items-center">
-            <button disabled={downvoted} style={downvoted ? {backgroundColor: 'transparent'} : {}} onClick={() => handleUpvotePost()}>
-              <FaAngleUp stroke="black" strokeWidth="15px" fill={upvoted ? "gray" : (downvoted ? "transparent" : "white")}></FaAngleUp>
+            <button
+              disabled={downvoted}
+              style={downvoted ? { backgroundColor: "transparent" } : {}}
+              onClick={() => handleUpvotePost()}
+            >
+              <FaAngleUp
+                stroke="black"
+                strokeWidth="15px"
+                fill={upvoted ? "gray" : downvoted ? "transparent" : "white"}
+              ></FaAngleUp>
             </button>
             <p className="text-center text-white">{votes}</p>
-            <button disabled={upvoted}  onClick={() => handleDownvotePost()}>
-              <FaAngleDown stroke="black" strokeWidth="15px" fill={downvoted ? "gray" : (upvoted ? "transparent" : "white")}></FaAngleDown>
+            <button disabled={upvoted} onClick={() => handleDownvotePost()}>
+              <FaAngleDown
+                stroke="black"
+                strokeWidth="15px"
+                fill={downvoted ? "gray" : upvoted ? "transparent" : "white"}
+              ></FaAngleDown>
             </button>
           </div>
         </div>

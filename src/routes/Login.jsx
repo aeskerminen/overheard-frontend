@@ -16,6 +16,7 @@ const Login = () => {
         form.append("password", curPassword)
 
         loginHandler(curUsername, curPassword).then(resp => {
+            window.sessionStorage.setItem("userid", resp.data.id);
             navigate("/home")
         })
     }
