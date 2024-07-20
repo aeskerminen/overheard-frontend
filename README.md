@@ -8,6 +8,7 @@
 - [x] Posts with text content.
 - [x] Customizable posts.
 - [x] Voting system.
+- [x] Post filtering
 - [ ] Tags.
 - [ ] Polls.
 - [ ] Videos.
