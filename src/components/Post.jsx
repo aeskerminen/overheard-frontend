@@ -6,6 +6,7 @@ import {
   downvotePost,
   getVotes,
   unvotePost,
+  addComment,
 } from "../services/serviceHandler";
 import { getHowLongAgo } from "../utils/time";
 import { useSelector } from "react-redux";
@@ -43,7 +44,10 @@ const Post = (props) => {
     setForumOpen(!forumOpen);
   };
 
-  const handleComment = () => {};
+  const handleComment = (e) => {
+    e.preventDefault();
+    addComment(commentContent, post._id);
+  };
 
   const handleUpvotePost = () => {
     if (!downvoted) {
@@ -143,7 +147,7 @@ const Post = (props) => {
         </div>
         {forumOpen && (
           <div className="m-auto bg-white p-2">
-            <form className="p-2" onSubmit={handleComment}>
+            <form className="p-2" onSubmit={(e) => handleComment(e)}>
               <input
                 type="text"
                 name="content"
@@ -154,7 +158,7 @@ const Post = (props) => {
             </form>
             <div className="p-2 bg-slate-300">
               {post.forum.comments.map((c, i) => {
-                return <div key={i}>{c}</div>;
+                return <div key={i}>{c.content}</div>;
               })}
             </div>
           </div>
