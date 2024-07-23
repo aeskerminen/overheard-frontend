@@ -13,7 +13,6 @@ const postsSlice = createSlice({
     },
     sort: (state,action) => {
       const temp = [...state]
-      console.log(action.payload)
       switch(action.payload) {
         case 'newest':
           temp.sort((a,b) => a.createdAt < b.createdAt)
