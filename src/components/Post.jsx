@@ -21,11 +21,12 @@ const Post = (props) => {
   const [votes, setVotes] = useState(0);
 
   const [forumOpen, setForumOpen] = useState(false);
+  const [commentContent, setCommentContent] = useState("");
+
+  console.log(post);
 
   useEffect(() => {
-    getVotes(props.post.id).then((result) => {
-      setVotes(result.data[0].votes);
-    });
+    setVotes(post.votes.votes);
 
     const voteState =
       post.votes.voters[window.sessionStorage.getItem("userid")];
@@ -41,6 +42,8 @@ const Post = (props) => {
   const handleForum = () => {
     setForumOpen(!forumOpen);
   };
+
+  const handleComment = () => {};
 
   const handleUpvotePost = () => {
     if (!downvoted) {
@@ -138,7 +141,24 @@ const Post = (props) => {
             </div>
           </div>
         </div>
-        {forumOpen && <div className="m-auto bg-white p-2">FORUM</div>}
+        {forumOpen && (
+          <div className="m-auto bg-white p-2">
+            <form className="p-2" onSubmit={handleComment}>
+              <input
+                type="text"
+                name="content"
+                placeholder="Comment..."
+                onChange={(e) => setCommentContent(e.target.value)}
+              ></input>
+              <button type="submit">Add comment</button>
+            </form>
+            <div className="p-2 bg-slate-300">
+              {post.forum.comments.map((c, i) => {
+                return <div key={i}>{c}</div>;
+              })}
+            </div>
+          </div>
+        )}
       </React.Fragment>
     );
   }
