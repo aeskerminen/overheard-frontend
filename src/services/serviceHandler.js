@@ -70,11 +70,19 @@ const unvotePost = (identifier) => {
   return req.then();
 };
 
-
 const getVotes = (identifier) => {
   const req = axios.get(`${BASE_URL}/posts/${identifier}/votes`, {
     withCredentials: true,
   });
+  return req.then();
+};
+
+const addComment = (content, id) => {
+  const req = axios.post(
+    `${BASE_URL}/posts/${id}/comments`,
+    { content },
+    { withCredentials: true }
+  );
   return req.then();
 };
 
@@ -87,4 +95,5 @@ export {
   downvotePost,
   unvotePost,
   getVotes,
+  addComment,
 };
