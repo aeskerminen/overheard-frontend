@@ -10,6 +10,7 @@ import CreationModal from "./components/CreationModal.jsx";
 
 import { store } from "./store";
 import { Provider } from "react-redux";
+import ForumView from "./components/ForumView.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
         path: "home",
         element: <Home />,
       },
+      {
+        path: "home/:id",
+        element: <ForumView/>
+      }
     ],
   },
 ]);
