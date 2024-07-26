@@ -150,7 +150,7 @@ const ForumView = () => {
           maxWidth: "25rem",
         }}
       >
-        <div className="p-1">
+        <div className="p-1 flex flex-col gap-2">
           {post.forum.comments.map((c, i) => {
             return (
               <div key={i} className="bg-white p-4 flex flex-col rounded-md">
