@@ -158,7 +158,7 @@ const Post = (props) => {
             </form>
             <div className="p-2 bg-slate-300">
               {post.forum.comments.map((c, i) => {
-                return <div key={i}>{c.content}</div>;
+                return <div key={i}>{c.num} / {c.content}</div>;
               })}
             </div>
           </div>
