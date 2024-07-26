@@ -8,16 +8,10 @@ import {
   addComment,
 } from "../services/serviceHandler";
 import { getHowLongAgo } from "../utils/time";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 const ForumView = () => {
-  const { id } = useParams();
-  console.log(id);
-  const post = useSelector((state) =>
-    state.posts.find((p) => p.identifier === id)
-  );
-
   const [upvoted, setUpvoted] = useState(false);
   const [downvoted, setDownvoted] = useState(false);
 
@@ -25,19 +19,28 @@ const ForumView = () => {
 
   const [commentContent, setCommentContent] = useState("");
 
-  useEffect(() => {
-    setVotes(post.votes.votes);
+  const { id } = useParams();
+  console.log(id);
+  const post = useSelector((state) => {
+    console.log(state);
+    return state.posts.find((p) => p.identifier === id);
+  });
 
-    const voteState =
-      post.votes.voters[window.sessionStorage.getItem("userid")];
-    if (voteState !== undefined) {
-      if (voteState === "up") {
-        setUpvoted(true);
-      } else if (voteState === "down") {
-        setDownvoted(true);
+  useEffect(() => {
+    if (post !== undefined) {
+      setVotes(post.votes.votes);
+
+      const voteState =
+        post.votes.voters[window.sessionStorage.getItem("userid")];
+      if (voteState !== undefined) {
+        if (voteState === "up") {
+          setUpvoted(true);
+        } else if (voteState === "down") {
+          setDownvoted(true);
+        }
       }
     }
-  }, [post]);
+  }, []);
 
   const handleComment = (e) => {
     e.preventDefault();
@@ -72,10 +75,12 @@ const ForumView = () => {
     }
   };
 
+  if (post === null || post === undefined) return <div>Loading...</div>;
+
   return (
-    <React.Fragment>
+    <div className="flex flex-col items-end h-full">
       <div
-        className="mr-2 ml-2 p-2 shadow-lg self-center rounded flex flex-row gap-4"
+        className="p-2 shadow-lg self-center flex flex-row gap-4"
         style={{
           backgroundColor: "#3D3D3D",
           minWidth: "20rem",
@@ -137,7 +142,14 @@ const ForumView = () => {
           </div>
         </div>
       </div>
-      <div className="m-auto bg-white p-2">
+      <div
+        className="m-auto bg-white p-2"
+        style={{
+          backgroundColor: "#3D3D3D",
+          minWidth: "20rem",
+          maxWidth: "25rem",
+        }}
+      >
         <form className="p-2" onSubmit={(e) => handleComment(e)}>
           <input
             type="text"
@@ -157,7 +169,7 @@ const ForumView = () => {
           })}
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

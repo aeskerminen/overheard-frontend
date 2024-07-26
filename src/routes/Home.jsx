@@ -3,7 +3,7 @@ import Post from "../components/Post";
 
 import { useDispatch, useSelector } from "react-redux";
 import { switchModal } from "../reducers/creationModalSlice";
-import { fetchPosts, sortPosts } from "../reducers/postsSlice";
+import { sortPosts } from "../reducers/postsSlice";
 
 const Home = () => {
   const posts = useSelector((state) => state.posts);
@@ -11,10 +11,6 @@ const Home = () => {
   const [filter, setFilter] = useState("newest");
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
 
   useEffect(() => {
     switch(filter) {
