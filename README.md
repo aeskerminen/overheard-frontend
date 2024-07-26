@@ -14,6 +14,7 @@
 - [ ] Videos.
 - [ ] Location -based mapping of content.
 - [ ] Cutomized feed based on channels that you're subscribed to.
+- [ ] Comment system
 
 ## The STACK
 
