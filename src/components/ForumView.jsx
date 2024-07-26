@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { MdModeComment } from "react-icons/md";
 import {
@@ -8,7 +8,7 @@ import {
   addComment,
 } from "../services/serviceHandler";
 import { getHowLongAgo } from "../utils/time";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 const ForumView = () => {
@@ -40,7 +40,7 @@ const ForumView = () => {
         }
       }
     }
-  }, []);
+  }, [post]);
 
   const handleComment = (e) => {
     e.preventDefault();
@@ -78,9 +78,9 @@ const ForumView = () => {
   if (post === null || post === undefined) return <div>Loading...</div>;
 
   return (
-    <div className="flex flex-col items-end h-full">
+    <div className="flex flex-col h-full">
       <div
-        className="p-2 shadow-lg self-center flex flex-row gap-4"
+        className="p-2 shadow-lg self-center flex flex-row w-full "
         style={{
           backgroundColor: "#3D3D3D",
           minWidth: "20rem",
@@ -143,14 +143,27 @@ const ForumView = () => {
         </div>
       </div>
       <div
-        className="m-auto bg-white p-2"
+        className="mr-auto ml-auto bg-white p-2 grow flex flex-col border-t-2 border-black"
         style={{
           backgroundColor: "#3D3D3D",
           minWidth: "20rem",
           maxWidth: "25rem",
         }}
       >
-        <form className="p-2" onSubmit={(e) => handleComment(e)}>
+        <div className="p-1">
+          {post.forum.comments.map((c, i) => {
+            return (
+              <div key={i} className="bg-white p-4 flex flex-col rounded-md">
+                <p>{c.num}</p>
+                <p>{c.content}</p>
+              </div>
+            );
+          })}
+        </div>
+        <form
+          className="p-2 bg-white mt-auto"
+          onSubmit={(e) => handleComment(e)}
+        >
           <input
             type="text"
             name="content"
@@ -159,15 +172,6 @@ const ForumView = () => {
           ></input>
           <button type="submit">Add comment</button>
         </form>
-        <div className="p-2 bg-slate-300">
-          {post.forum.comments.map((c, i) => {
-            return (
-              <div key={i}>
-                {c.num} / {c.content}
-              </div>
-            );
-          })}
-        </div>
       </div>
     </div>
   );
