@@ -1,30 +1,29 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { MdModeComment } from "react-icons/md";
 import {
   upvotePost,
   downvotePost,
   unvotePost,
+  addComment,
 } from "../services/serviceHandler";
 import { getHowLongAgo } from "../utils/time";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const Post = (props) => {
+const ForumView = () => {
+  const { id } = useParams();
+  console.log(id);
   const post = useSelector((state) =>
-    state.posts.find((p) => p.identifier === props.post.id)
+    state.posts.find((p) => p.identifier === id)
   );
-
-  const navigate = useNavigate();
 
   const [upvoted, setUpvoted] = useState(false);
   const [downvoted, setDownvoted] = useState(false);
 
   const [votes, setVotes] = useState(0);
 
-  const [forumOpen, setForumOpen] = useState(false);
-
-  console.log(post);
+  const [commentContent, setCommentContent] = useState("");
 
   useEffect(() => {
     setVotes(post.votes.votes);
@@ -40,8 +39,9 @@ const Post = (props) => {
     }
   }, [post]);
 
-  const handleForum = () => {
-    setForumOpen(!forumOpen);
+  const handleComment = (e) => {
+    e.preventDefault();
+    addComment(commentContent, post._id);
   };
 
   const handleUpvotePost = () => {
@@ -72,11 +72,9 @@ const Post = (props) => {
     }
   };
 
-  if (post === undefined) return <div>Loading...</div>;
-  else {
-    return (
+  return (
+    <React.Fragment>
       <div
-        onClick={() => navigate(`/home/${props.post.id}`)}
         className="mr-2 ml-2 p-2 shadow-lg self-center rounded flex flex-row gap-4"
         style={{
           backgroundColor: "#3D3D3D",
@@ -110,7 +108,6 @@ const Post = (props) => {
           </p>
           <MdModeComment
             className="self-start mt-auto m-0"
-            onClick={handleForum}
             size={25}
             fill="#AFAFAF"
           ></MdModeComment>
@@ -140,8 +137,28 @@ const Post = (props) => {
           </div>
         </div>
       </div>
-    );
-  }
+      <div className="m-auto bg-white p-2">
+        <form className="p-2" onSubmit={(e) => handleComment(e)}>
+          <input
+            type="text"
+            name="content"
+            placeholder="Comment..."
+            onChange={(e) => setCommentContent(e.target.value)}
+          ></input>
+          <button type="submit">Add comment</button>
+        </form>
+        <div className="p-2 bg-slate-300">
+          {post.forum.comments.map((c, i) => {
+            return (
+              <div key={i}>
+                {c.num} / {c.content}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </React.Fragment>
+  );
 };
 
-export default Post;
+export default ForumView;
