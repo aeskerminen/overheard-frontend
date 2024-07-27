@@ -18,7 +18,7 @@ const postsSlice = createSlice({
           temp.sort((a,b) => a.createdAt < b.createdAt)
           break;
         case 'mcomments':
-          temp.sort((a,b) => a.createdAt < b.createdAt)
+          temp.sort((a,b) => a.forum.comments.length < b.forum.comments.length)
           break;
         case 'mvotes':
           temp.sort((a,b) => a.votes.votes < b.votes.votes)
