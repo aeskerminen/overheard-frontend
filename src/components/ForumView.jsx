@@ -11,6 +11,106 @@ import { getHowLongAgo } from "../utils/time";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
+import { IoMdSend } from "react-icons/io";
+
+const Comment = ({ c, color }) => {
+  const [upvoted, setUpvoted] = useState(false);
+  const [downvoted, setDownvoted] = useState(false);
+
+  const [votes, setVotes] = useState(0);
+
+  console.log(c);
+
+  useEffect(() => {
+    if (c.votes !== undefined) {
+      setVotes(c.votes.votes);
+
+      const voteState = c.votes.voters[window.sessionStorage.getItem("userid")];
+      if (voteState !== undefined) {
+        if (voteState === "up") {
+          setUpvoted(true);
+        } else if (voteState === "down") {
+          setDownvoted(true);
+        }
+      }
+    }
+  }, [c]);
+
+  const handleUpvotePost = () => {
+    if (!downvoted) {
+      if (upvoted) {
+        unvotePost(c._id);
+        setUpvoted(false);
+        setVotes(votes - 1);
+      } else {
+        upvotePost(c._id);
+        setUpvoted(true);
+        setVotes(votes + 1);
+      }
+    }
+  };
+
+  const handleDownvotePost = () => {
+    if (!upvoted) {
+      if (downvoted) {
+        unvotePost(c._id);
+        setDownvoted(false);
+        setVotes(votes + 1);
+      } else {
+        downvotePost(c._id);
+        setDownvoted(true);
+        setVotes(votes - 1);
+      }
+    }
+  };
+
+  return (
+    <div className="p-2 border-b-2 border-black self-center flex flex-row w-full ">
+      <div className="flex flex-col p-2 gap-2 grow">
+        <div className="flex items-center gap-2 text-white">
+          <p className="p-1 rounded-xl text-sm">{c.num}</p>
+          <p>{getHowLongAgo(c.createdAt)}</p>
+        </div>
+        <p
+          className="text-md"
+          style={{
+            color: color,
+            width: "calc(100%)",
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+          }}
+        >
+          {c.content}
+        </p>
+      </div>
+      <div className="flex flex-col items-center mr-2">
+        <p className="text-2xl text-white">...</p>
+        <div className="text-2xl mt-auto mb-auto flex flex-col items-center">
+          <button
+            disabled={downvoted}
+            style={downvoted ? { backgroundColor: "transparent" } : {}}
+            onClick={() => handleUpvotePost()}
+          >
+            <FaAngleUp
+              stroke="black"
+              strokeWidth="15px"
+              fill={upvoted ? "gray" : downvoted ? "transparent" : "white"}
+            ></FaAngleUp>
+          </button>
+          <p className="text-center text-white">{votes}</p>
+          <button disabled={upvoted} onClick={() => handleDownvotePost()}>
+            <FaAngleDown
+              stroke="black"
+              strokeWidth="15px"
+              fill={downvoted ? "gray" : upvoted ? "transparent" : "white"}
+            ></FaAngleDown>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ForumView = () => {
   const [upvoted, setUpvoted] = useState(false);
   const [downvoted, setDownvoted] = useState(false);
@@ -82,6 +182,7 @@ const ForumView = () => {
       className="flex flex-col h-full"
       style={{ backgroundColor: "#151515" }}
     >
+      {/* POST CONTAINER */}
       <div
         className="p-2 shadow-lg self-center flex flex-row w-full "
         style={{
@@ -115,10 +216,7 @@ const ForumView = () => {
             {post.content}
           </p>
           <div className="flex mt-auto m-0 text-white gap-1">
-            <MdModeComment
-              size={25}
-              fill="#AFAFAF"
-            ></MdModeComment>
+            <MdModeComment size={25} fill="#AFAFAF"></MdModeComment>
             <p>{post.forum.comments.length}</p>
           </div>
         </div>
@@ -147,36 +245,39 @@ const ForumView = () => {
           </div>
         </div>
       </div>
+      {/* ^ POST CONTAINER */}
       <div
-        className="mr-auto ml-auto bg-white p-2 grow flex flex-col border-t-2 border-black"
+        className="mr-auto ml-auto bg-white grow w-full flex flex-col border-t-2 border-black"
         style={{
           backgroundColor: "#3D3D3D",
           minWidth: "20rem",
           maxWidth: "25rem",
         }}
       >
-        <div className="p-1 flex flex-col gap-2">
+        {/* COMMENT CONTAINER */}
+        <div className="p-2 flex flex-col gap-2">
           {post.forum.comments.map((c, i) => {
-            return (
-              <div key={i} className="bg-white p-4 flex flex-col rounded-md">
-                <p>{c.num}</p>
-                <p>{c.content}</p>
-              </div>
-            );
+            return <Comment key={i} c={c} color={post.color}></Comment>;
           })}
         </div>
-        <form
-          className="p-2 bg-white mt-auto"
-          onSubmit={(e) => handleComment(e)}
-        >
-          <input
-            type="text"
-            name="content"
-            placeholder="Comment..."
-            onChange={(e) => setCommentContent(e.target.value)}
-          ></input>
-          <button type="submit">Add comment</button>
-        </form>
+        {/* ^ COMMENT CONTAINER */}
+        <div className="mt-auto border-t-2 border-black">
+          <form
+            className="flex items-center p-3 gap-4"
+            onSubmit={(e) => handleComment(e)}
+          >
+            <input
+              type="text"
+              name="content"
+              placeholder="Comment..."
+              className="grow border-0 border-b-2 p-1 bg-transparent text-white"
+              onChange={(e) => setCommentContent(e.target.value)}
+            ></input>
+            <button type="submit">
+              <IoMdSend fill="white" size={30}></IoMdSend>
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
