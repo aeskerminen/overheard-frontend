@@ -78,7 +78,10 @@ const ForumView = () => {
   if (post === null || post === undefined) return <div>Loading...</div>;
 
   return (
-    <div className="flex flex-col h-full">
+    <div
+      className="flex flex-col h-full"
+      style={{ backgroundColor: "#151515" }}
+    >
       <div
         className="p-2 shadow-lg self-center flex flex-row w-full "
         style={{
@@ -111,11 +114,13 @@ const ForumView = () => {
           >
             {post.content}
           </p>
-          <MdModeComment
-            className="self-start mt-auto m-0"
-            size={25}
-            fill="#AFAFAF"
-          ></MdModeComment>
+          <div className="flex mt-auto m-0 text-white gap-1">
+            <MdModeComment
+              size={25}
+              fill="#AFAFAF"
+            ></MdModeComment>
+            <p>{post.forum.comments.length}</p>
+          </div>
         </div>
         <div className="flex flex-col items-center mr-2">
           <p className="text-2xl text-white">...</p>
