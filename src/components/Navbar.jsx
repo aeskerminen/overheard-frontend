@@ -8,8 +8,8 @@ const Navbar = () => {
   const location = useSelector((state) => state.location);
 
   useEffect(() => {
-    dispatch(fetchPosts());
     dispatch(fetchLocation());
+    dispatch(fetchPosts(location.name));
   }, [dispatch]);
 
   return (

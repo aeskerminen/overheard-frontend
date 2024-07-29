@@ -38,8 +38,8 @@ const createPost = (content, channel, color, location) => {
   return req.then();
 };
 
-const getPosts = () => {
-  const req = axios.get(`${BASE_URL}/posts`, { withCredentials: true });
+const getPosts = (location) => {
+  const req = axios.get(`${BASE_URL}/posts?location=${location}`, { withCredentials: true });
   return req.then();
 };
 
