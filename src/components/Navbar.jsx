@@ -1,39 +1,15 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../reducers/postsSlice";
-import { getLocation } from "../services/serviceHandler";
+import { fetchLocation } from "../reducers/locationSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const [location, setLocation] = useState("");
+  const location = useSelector((state) => state.location);
 
   useEffect(() => {
     dispatch(fetchPosts());
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (res) => {
-          const lat = (res.coords.latitude);
-          const lon = (res.coords.longitude);
-
-          getLocation(lat, lon).then((res) => {
-            setLocation(res.data.name);
-          });
-
-          console.log(lat, lon);
-        },
-        (err) => {
-          console.log(err);
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 5000,
-          maximumAge: 0,
-        }
-      );
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
+    dispatch(fetchLocation());
   }, [dispatch]);
 
   return (
@@ -41,7 +17,7 @@ const Navbar = () => {
       className="flex flex-row justify-center items-center p-2 text-white"
       style={{ backgroundColor: "#3D3D3D" }}
     >
-      <h1>{location}</h1>
+      <h1>{location.name}</h1>
     </div>
   );
 };
