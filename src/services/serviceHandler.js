@@ -86,6 +86,12 @@ const addComment = (content, id) => {
   return req.then();
 };
 
+const getLocation = (lat, lon) => {
+  const req = axios.post(`${BASE_URL}/location/${lat}/${lon}`);
+
+  return req.then();
+};
+
 export {
   loginHandler,
   registerHandler,
@@ -96,4 +102,5 @@ export {
   unvotePost,
   getVotes,
   addComment,
+  getLocation,
 };

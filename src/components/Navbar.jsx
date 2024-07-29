@@ -1,17 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchPosts } from "../reducers/postsSlice";
+import { getLocation } from "../services/serviceHandler";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const [location, setLocation] = useState("");
+
   useEffect(() => {
     dispatch(fetchPosts());
-    
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (res) => {
           const lat = Math.round(res.coords.latitude);
           const lon = Math.round(res.coords.longitude);
+
+          getLocation(lat, lon).then((res) => {
+            setLocation(res.data.name);
+          });
 
           console.log(lat, lon);
         },
@@ -34,7 +41,7 @@ const Navbar = () => {
       className="flex flex-row justify-center items-center p-2 text-white"
       style={{ backgroundColor: "#3D3D3D" }}
     >
-      <h1>{"location"}</h1>
+      <h1>{location}</h1>
     </div>
   );
 };
