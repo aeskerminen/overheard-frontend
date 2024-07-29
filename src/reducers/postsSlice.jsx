@@ -61,10 +61,10 @@ export const fetchPosts = (location) => async (dispatch) => {
   }
 };
 
-export const addPost = (content, channel, color) => {
+export const addPost = (content, channel, color, location) => {
   return async (dispatch) => {
     console.log(content, channel, color);
-    const res = await createPost(content, channel, color);
+    const res = await createPost(content, channel, color, location);
     dispatch(append(res.data.post));
   };
 };
