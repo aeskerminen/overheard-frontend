@@ -29,10 +29,10 @@ const registerHandler = (email, password) => {
   return req.then();
 };
 
-const createPost = (content, channel, color) => {
+const createPost = (content, channel, color, location) => {
   const req = axios.post(
     `${BASE_URL}/posts`,
-    { content, channel, color },
+    { content, channel, color, location },
     { withCredentials: true }
   );
   return req.then();

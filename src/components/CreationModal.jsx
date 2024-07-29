@@ -9,15 +9,14 @@ const CreationModal = () => {
   const [channel, setChannel] = useState("");
   const [color, setColor] = useState("#000000");
 
-  const [location, setLocation] = useState("Locating...");
-
   const dispatch = useDispatch();
   const state = useSelector((state) => state.modal);
+  const location = useSelector((state) => state.location);
 
   const handleCreatePost = (e) => {
     e.preventDefault();
 
-    dispatch(addPost(content, channel, color));
+    dispatch(addPost(content, channel, color, location.name));
   };
 
   if (!state.visible) return null;
