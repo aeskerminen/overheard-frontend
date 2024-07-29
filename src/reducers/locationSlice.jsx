@@ -3,7 +3,7 @@ import { getLocation } from "../services/serviceHandler";
 
 const locationSlice = createSlice({
   name: "location",
-  initialState: {},
+  initialState: null,
   reducers: {
     set: (state, action) => {
       return action.payload;

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getPosts, createPost, getLocation } from "../services/serviceHandler";
+import { getPosts, createPost } from "../services/serviceHandler";
 
 const postsSlice = createSlice({
   name: "posts",
@@ -12,6 +12,8 @@ const postsSlice = createSlice({
       return [...action.payload];
     },
     sort: (state, action) => {
+      if (state === null) return;
+
       const temp = [...state];
       switch (action.payload) {
         case "newest":
@@ -35,30 +37,9 @@ const postsSlice = createSlice({
 export const { append, set, sort } = postsSlice.actions;
 
 export const fetchPosts = (location) => async (dispatch) => {
-  if (location === undefined) {
-    navigator.geolocation.getCurrentPosition(
-      (loc) => {
-        getLocation(loc.coords.latitude, loc.coords.longitude)
-          .then((res) => {
-            console.log(res);
-            getPosts(res.data.name).then((posts) => {
-              dispatch(set(posts.data));
-            });
-          })
-          .catch((err) => {
-            console.log("Error fetching location from server: ", err);
-          });
-      },
-      () => {
-        console.log("Geolocation is not supported by this browser.");
-      },
-      { enableHighAccuracy: true }
-    );
-  } else {
-    const posts = await (await getPosts(location)).data;
+  const posts = await (await getPosts(location)).data;
 
-    dispatch(set(posts));
-  }
+  dispatch(set(posts));
 };
 
 export const addPost = (content, channel, color, location) => {

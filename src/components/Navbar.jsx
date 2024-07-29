@@ -8,9 +8,21 @@ const Navbar = () => {
   const location = useSelector((state) => state.location);
 
   useEffect(() => {
-    dispatch(fetchLocation());
-    dispatch(fetchPosts(location.name));
-  }, [dispatch]);
+    if (location === null) {
+      dispatch(fetchLocation());
+    }
+    if (location !== null) dispatch(fetchPosts(location.name));
+  }, [dispatch, location]);
+
+  if (location === null)
+    return (
+      <div
+        className="flex flex-row justify-center items-center p-2 text-white"
+        style={{ backgroundColor: "#3D3D3D" }}
+      >
+        <h1>Loading...</h1>
+      </div>
+    );
 
   return (
     <div
