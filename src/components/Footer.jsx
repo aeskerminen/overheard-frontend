@@ -15,27 +15,27 @@ const Footer = () => {
             <div className="flex justify-center items-center gap-4">
                 <div className="p-2 text-lg flex flex-col justify-center items-center gap-1 text-gray-300 hover:text-gray-50">
                     <div className="pl-4 pr-4 pt-1 pb-1 rounded-full flex justify-center items-center" style={tab === "home" ? { backgroundColor: 'orangered' } : {}} onClick={() => setTab("home")}>
-                        <TiHome size={30}></TiHome>
+                        <TiHome size={20}></TiHome>
                     </div>
-                    <p>Home</p>
+                    <p className="text-md">Home</p>
                 </div>
                 <div className="p-2 text-lg flex flex-col justify-center items-center gap-1 text-gray-300 hover:text-gray-50" >
                     <div className="pl-4 pr-4 pt-1 pb-1 rounded-full flex justify-center items-center" style={tab === "channels" ? { backgroundColor: 'orangered' } : {}} onClick={() => setTab("channels")}>
-                        <FaSearch size={30}></FaSearch>
+                        <FaSearch size={20}></FaSearch>
                     </div>
-                    <p>Channels</p>
+                    <p className="text-md">Channels</p>
                 </div>
                 <div className="p-2 text-lg flex flex-col justify-center items-center gap-1 text-gray-300 hover:text-gray-50" >
                     <div className="pl-4 pr-4 pt-1 pb-1 rounded-full flex justify-center items-center" style={tab === "inbox" ? { backgroundColor: 'orangered' } : {}} onClick={() => setTab("inbox")}>
-                        <GoBellFill size={30}></GoBellFill>
+                        <GoBellFill size={20}></GoBellFill>
                     </div>
-                    <p>Inbox</p>
+                    <p className="text-md">Inbox</p>
                 </div>
                 <div className="p-2 text-lg flex flex-col justify-center items-center gap-1 text-gray-300 hover:text-gray-50" >
                     <div className="pl-4 pr-4 pt-1 pb-1 rounded-full flex justify-center items-center" style={tab === "me" ? { backgroundColor: 'orangered' } : {}} onClick={() => setTab("me")}>
-                        <IoPerson size={30}></IoPerson>
+                        <IoPerson size={20}></IoPerson>
                     </div>
-                    <p>Me</p>
+                    <p className="text-md">Me</p>
                 </div>
             </div>
         </div>
