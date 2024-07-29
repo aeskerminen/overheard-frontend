@@ -13,18 +13,28 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    switch(filter) {
-      case 'newest':
-        dispatch(sortPosts('newest'))
+    switch (filter) {
+      case "newest":
+        dispatch(sortPosts("newest"));
         break;
-      case 'mcomments':
-        dispatch(sortPosts('mcomments'))
+      case "mcomments":
+        dispatch(sortPosts("mcomments"));
         break;
-      case 'mvotes':
-        dispatch(sortPosts('mvotes'))
+      case "mvotes":
+        dispatch(sortPosts("mvotes"));
         break;
     }
-  }, [filter, dispatch])
+  }, [filter, dispatch]);
+
+  if (posts === null)
+    return (
+      <div
+        style={{ backgroundColor: "#151515" }}
+        className="grow text-white text-xl flex justify-center items-center"
+      >
+        <p>Loading...</p>
+      </div>
+    );
 
   return (
     <div
@@ -82,7 +92,7 @@ const Home = () => {
             key={i}
             post={{
               location: "here",
-            
+
               id: p.identifier,
             }}
           ></Post>

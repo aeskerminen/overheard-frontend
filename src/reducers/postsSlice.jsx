@@ -3,7 +3,7 @@ import { getPosts, createPost, getLocation } from "../services/serviceHandler";
 
 const postsSlice = createSlice({
   name: "posts",
-  initialState: [],
+  initialState: null,
   reducers: {
     append: (state, action) => {
       return state.concat(action.payload);
