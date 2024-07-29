@@ -19,8 +19,6 @@ const Comment = ({ c, color }) => {
 
   const [votes, setVotes] = useState(0);
 
-  console.log(c);
-
   useEffect(() => {
     if (c.votes !== undefined) {
       setVotes(c.votes.votes);
@@ -122,12 +120,12 @@ const ForumView = () => {
   const { id } = useParams();
   console.log(id);
   const post = useSelector((state) => {
-    console.log(state);
+    if (state.posts === null) return null;
     return state.posts.find((p) => p.identifier === id);
   });
 
   useEffect(() => {
-    if (post !== undefined) {
+    if (post !== null) {
       setVotes(post.votes.votes);
 
       const voteState =
@@ -175,7 +173,15 @@ const ForumView = () => {
     }
   };
 
-  if (post === null || post === undefined) return <div>Loading...</div>;
+  if (post === null || post === undefined)
+    return (
+      <div
+        className="flex grow justify-center items-center text-white text-xl"
+        style={{ backgroundColor: "#151515" }}
+      >
+        Loading...
+      </div>
+    );
 
   return (
     <div
