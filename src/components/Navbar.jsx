@@ -13,8 +13,8 @@ const Navbar = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (res) => {
-          const lat = Math.round(res.coords.latitude);
-          const lon = Math.round(res.coords.longitude);
+          const lat = (res.coords.latitude);
+          const lon = (res.coords.longitude);
 
           getLocation(lat, lon).then((res) => {
             setLocation(res.data.name);
